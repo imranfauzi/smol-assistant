@@ -25,8 +25,8 @@ def test_run_assistant_agent(monkeypatch):
     calls = []
 
     class FakeAgent:
-        def invoke(self, messages, config):
-            calls.append((messages, config))
+        def invoke(self, messages, config, context):
+            calls.append((messages, config, context))
             return {"messages": [SimpleNamespace(content="Hello!")]}
 
     monkeypatch.setattr(assistant, "build_assistant_agent", lambda: FakeAgent())
@@ -43,3 +43,5 @@ def test_run_assistant_agent(monkeypatch):
     assert calls[0][0] == {"messages": [{"role": "user", "content": "Hi"}]}
     assert calls[0][1]["configurable"]["thread_id"] == "session-1"
     assert calls[0][1]["configurable"]["checkpoint_ns"] == "user-1"
+    assert calls[0][2].thread_id == "session-1"
+    assert calls[0][2].user_id == "user-1"

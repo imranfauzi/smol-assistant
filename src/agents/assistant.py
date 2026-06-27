@@ -6,22 +6,25 @@ from langchain.agents.middleware import ModelRetryMiddleware, ToolRetryMiddlewar
 
 from core.llm import instance_llm
 from core.prompt import load_prompt
+from core.checkpointer import get_assistant_memory
 
+from schemas.context_schema import Context
 from schemas.agent_schema import AgentInput
-
 
 # 1. Build the agent
 def build_assistant_agent():
     llm = instance_llm()
     assistant_prompt = load_prompt("assistant_prompt")
+    assistant_memory = get_assistant_memory()
+
 
     tools = []
-
-
     return create_agent(      
         model=llm,
         tools=tools,
         system_prompt=assistant_prompt,
+        checkpointer=assistant_memory,
+        context_schema=Context,
         middleware=[
             ModelRetryMiddleware(max_retries=3),
             ToolRetryMiddleware(max_retries=2),
@@ -55,5 +58,6 @@ def run_assistant_agent(payload: AgentInput):
     result = assistant_agent.invoke(
         {"messages": [{"role": "user", "content": user_request}]},
         config=assistant_config,
+        context=Context(thread_id=session_id, user_id=user_id)
     )
     return result["messages"][-1].content
