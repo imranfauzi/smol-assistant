@@ -16,3 +16,4 @@ features*
 working*
 kb*
 prompts*
+tests/__pycache__*
