@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     # HUEY
     HUEY_QUEUE_PATH: str
 
+    # PROMPT
+    PROMPT_PATH: str
 
    
 settings = Settings()

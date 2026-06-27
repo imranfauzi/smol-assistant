@@ -2,8 +2,6 @@
 from core.config import settings
 from langchain_openai import ChatOpenAI
 
-from schemas.response_schema import CustomResponse
-
 def instance_llm():
     try:
         llm = ChatOpenAI(
@@ -14,8 +12,4 @@ def instance_llm():
         return llm
     except Exception as e:
         print(f"Error initializing LLM: {e}")
-        raise CustomResponse(
-            status="error", 
-            message="Failed to initialize LLM",
-            data={"error": str(e)}
-        )
+        raise RuntimeError("Failed to initialize LLM") from e
