@@ -1,0 +1,15 @@
+data*
+src/__pycache__*
+src/tools/__pycache__*
+src/utils/__pycache__*
+src/core/__pycache__*
+src/agents/__pycache__*
+src/schemas/__pycache__*
+src/tasks/__pycache__*
+src/core/rag/__pycache__*
+src/flow/__pycache__*
+src/working/*
+src/utils/plan_execute/__pycache__*
+features*
+.env
+.venv
