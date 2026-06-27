@@ -13,3 +13,4 @@ src/utils/plan_execute/__pycache__*
 features*
 .env
 .venv
+working
