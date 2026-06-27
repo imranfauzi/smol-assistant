@@ -15,6 +15,12 @@ class Settings(BaseSettings):
     LLM_API_KEY: SecretStr
     LLM_MODEL: str
 
+    # MLFLOW
+    MLFLOW_TRACKING_URI: str
+    MLFLOW_EXPERIMENT_NAME: str
+    MLFLOW_SUPPRESS_PRINTING_URL_TO_STDOUT: str = "true"
+    MLFLOW_LOGGING_LEVEL: str = "ERROR"
+
     # WORKING DIR
     WORKING_PATH: str
 
@@ -30,6 +36,8 @@ class Settings(BaseSettings):
 
     # PROMPT
     PROMPT_PATH: str
+
+
 
    
 settings = Settings()
