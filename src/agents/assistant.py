@@ -11,6 +11,9 @@ from core.checkpointer import get_assistant_memory
 from schemas.context_schema import Context
 from schemas.agent_schema import AgentInput
 
+from tools.current_time import get_current_time
+from tools.google_search import google_search
+
 # 1. Build the agent
 def build_assistant_agent():
     llm = instance_llm()
@@ -18,7 +21,7 @@ def build_assistant_agent():
     assistant_memory = get_assistant_memory()
 
 
-    tools = []
+    tools = [get_current_time, google_search]
     return create_agent(      
         model=llm,
         tools=tools,

@@ -9,7 +9,7 @@ def main():
 
     session_id = str(uuid.uuid4())
     user_id = 'user123'
-    user_request = "Who is Prime minister of malaysia today"
+    user_request = "what time is it?"
 
     # mlflow: init
     setup_mlflow()

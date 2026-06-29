@@ -37,7 +37,9 @@ class Settings(BaseSettings):
     # PROMPT
     PROMPT_PATH: str
 
+    # TOOL: google_search
+    SERPER_URL: str
+    SERPER_API_KEY: SecretStr
+        
 
-
-   
 settings = Settings()
