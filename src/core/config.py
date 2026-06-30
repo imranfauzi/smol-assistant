@@ -25,21 +25,24 @@ class Settings(BaseSettings):
     WORKING_PATH: str
 
     # AGENT MEMORY
-    CHECKPOINTER_PATH: str
+    CHECKPOINTER_PATH: str = str(PROJECT_ROOT / "data" / "checkpointer")
 
     # RAG
-    CHROMADB_PATH:str
-    RAW_DOCS_PATH: str
+    CHROMADB_PATH: str = str(PROJECT_ROOT / "data" / "chromadb")
+    RAW_DOCS_PATH: str = str(PROJECT_ROOT / "kb")
 
     # HUEY
-    HUEY_QUEUE_PATH: str
+    HUEY_QUEUE_PATH: str = str(PROJECT_ROOT / "data" / "huey")
 
     # PROMPT
-    PROMPT_PATH: str
+    PROMPT_PATH: str = str(PROJECT_ROOT / "src" / "prompts")
 
     # TOOL: google_search
     SERPER_URL: str
     SERPER_API_KEY: SecretStr
+
+    # SKILL
+    SKILL_PATH: str = str(PROJECT_ROOT / "src" / "skills")
         
 
 settings = Settings()
