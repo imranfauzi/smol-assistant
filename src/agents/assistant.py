@@ -1,4 +1,5 @@
 import uuid
+from functools import lru_cache
 
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
@@ -13,15 +14,18 @@ from schemas.agent_schema import AgentInput
 
 from tools.current_time import get_current_time
 from tools.google_search import google_search
+from tools.search_skills import search_skills
+from tools.read_skill import read_skill
 
 # 1. Build the agent
+@lru_cache(maxsize=1)
 def build_assistant_agent():
     llm = instance_llm()
     assistant_prompt = load_prompt("assistant_prompt")
     assistant_memory = get_assistant_memory()
 
 
-    tools = [get_current_time, google_search]
+    tools = [get_current_time, google_search, search_skills, read_skill]
     return create_agent(      
         model=llm,
         tools=tools,
@@ -42,6 +46,9 @@ def build_assistant_agent():
             ),
         ],
     )
+
+def warmup_assistant_agent():
+    build_assistant_agent()
 
 def run_assistant_agent(payload: AgentInput):
 

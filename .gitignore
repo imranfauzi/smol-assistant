@@ -17,3 +17,8 @@ working*
 kb*
 prompts*
 tests/__pycache__*
+agents.md
+framework.md
+skills.md
+test_skill.md
+test.md
